@@ -25,4 +25,4 @@ Please contact me if you encounter any bugs or have requests for features.
 ## Reference:
 _Kernel Learning for Robust Dynamic Mode Decomposition: Linear and Nonlinear Disambiguation Optimization (LANDO)_  
 Peter J. Baddoo, Benjamin Herrmann, Beverley J. McKeon & Steven L. Brunton  
-[arXiv:2106.01510g](https://arxiv.org/abs/2106.01510)
+[arXiv:2106.01510](https://arxiv.org/abs/2106.01510)
