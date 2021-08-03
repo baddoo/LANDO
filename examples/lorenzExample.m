@@ -32,13 +32,13 @@ ranp = randperm(size(X,2)); Xr = X(:,ranp); Yr = Y(:,ranp);
 % Sparsification parameter. Increase for a sparser dictionary
 nu = 1e-6;
 
-% Choose base state to linearise about
+% Choose equilibrium base state to linearise about
 xBar = [-sqrt(Beta*(rho-1)),-sqrt(Beta*(rho-1)),rho-1]';
 
 % Define three different kernels
-linKernel = defineKernel('polynomial',[0,1]); % Linear kernel
-gaussKernel = defineKernel('gaussian',[1,1.9]); % Gaussian kernel
-quadKernel = defineKernel('polynomial',[1,1,1]); % Quadratic kernel
+linKernel   = defineKernel('polynomial', [0,1]);   % Linear kernel
+gaussKernel = defineKernel('gaussian',   [1,1.1]); % Gaussian kernel
+quadKernel  = defineKernel('polynomial', [1,1,1]); % Quadratic kernel
 
 % Train LANDO for the three kernels
 trainopts = {'display','backslash','xScl',xScl}; % Define training options
@@ -60,9 +60,9 @@ recQuad  = predictLANDO(quadModel,  10, x0, 'cont', options);
 % Compute predictions
 x0Pred = [10; 14; 10];  % New initial condition
 [~,predData] = ode45(@(t,x) lorenzFun(t,x,Sigma,Beta,rho),tspan,x0Pred,options); 
-predLin   = predictLANDO(linModel,   10, x0, 'cont', options);    
-predGauss = predictLANDO(gaussModel, 10, x0, 'cont', options);
-predQuad  = predictLANDO(quadModel,  10, x0, 'cont', options);
+predLin   = predictLANDO(linModel,   10, x0Pred, 'cont', options);    
+predGauss = predictLANDO(gaussModel, 10, x0Pred, 'cont', options);
+predQuad  = predictLANDO(quadModel,  10, x0Pred, 'cont', options);
 
 %% Plots
 LW = 'LineWidth'; IN  = 'Interpreter'; LT = 'Latex'; FS = 'FontSize';
