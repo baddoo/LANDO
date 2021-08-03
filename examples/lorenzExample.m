@@ -1,3 +1,5 @@
+addpath('../src/'); % Add the source files to the path
+
 % Lorenz's parameters (chaotic)
 Sigma = 10;  
 Beta = 8/3;
