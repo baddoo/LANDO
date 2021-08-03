@@ -4,7 +4,7 @@ The framework is described in the folowing schematic and reference
 
 <br/>
 <p align="center"> 
-<img src="images/schematic.png?raw=true" width="600px">
+<img src="images/schematic.png?raw=true" width="800px">
 </p>
 <br/>
 
