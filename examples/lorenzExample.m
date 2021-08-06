@@ -1,9 +1,7 @@
 addpath('../src/'); % Add the source files to the path
 
 % Lorenz's parameters (chaotic)
-Sigma = 10;  
-Beta = 8/3;
-rho = 28;
+Sigma = 10; Beta = 8/3; rho = 28;
 
 % Define the true linear operator for comparison
 trueLinOp = @(xBar) [-Sigma Sigma 0;...
@@ -28,6 +26,7 @@ X = x'; Y = dxdt'; % Arrange the data into data matrices
 
 % Rescale the data to improve the condition number
 xScl = diag(1./max(abs(X),[],2));
+
 % Shuffle the data to improve the quality of the dictionary
 ranp = randperm(size(X,2)); Xr = X(:,ranp); Yr = Y(:,ranp);
 
