@@ -88,7 +88,7 @@ xNPlot = xCPlot + noiseMag*randn(size(xCPlot))*sqrt(diag(var(xCPlot)));
 
 % Plot the clean data, noisy training data, and reconstructed trajectory
 % with the color indicating the integration time-step at each point
-f1 = figure(1); clf;
+f1 = figure(1); clf; colormap jet;
 subplot(1,3,1)
 color_line3(xCPlot(:,1),xCPlot(:,2),xCPlot(:,3),[0; diff(tPlot)],LW,1);
 niceFig; title({'clean data'},IN,LT,FS,15)

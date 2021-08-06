@@ -1,17 +1,30 @@
-function [eVals,eVecs,varargout] = linopLANDO(Xdic,Wtilde,kernel,varargin)
-% LANDO Linear and nonlinear disambiguation optimization
-%           dic = LANDO(X,Y,KERNEL,NU,SCL) returns the dictionary defined
-%           by the kernel, nu and the scaling SCL.
-%               
+function [eVals, eVecs, varargout] = linopLANDO(Xdic, Wtilde, kernel, varargin)
+%linopLANDO   Extract the linear operator from a LANDO model.
+%              
+%   [EVALS, EVECS] = LINOPLANDO(XDIC, WTILDE, KERNEL) extracts the
+%   eigenvalues (EVALS) and eigenvectors (EVECS) of the local linear 
+%   operator of the LANDO model for zero base state defined by the dictionary XDIC,
+%   weight matrix WTILDE and kernel structure KERNEL. The matrices XDIC and
+%   WTILDE should be learned from TRAINLANDO script. The input kernel class
+%   should be determined by the DEFINEKERNEL script.
 %
-% Inputs: X = x samples
-%         Y = y samples
-% kernel = kernel structure
-% xBar = linearised state
-% further optional inputs 
-% 'eigenModes', number of eigenmodes about 
-% 
-% Examples
+%   [EVALS, EVECS, LINOP] = LINOPLANDO(XDIC, WTILDE, KERNEL) also extracts the
+%   linear operator defined by the LANDO model.
+%
+%   [EVALS, EVECS, LINOP] = LINOPLANDO(XDIC, WTILDE, KERNEL, VALUE) sets the followig parameters:
+%   - 'xBar', XBAR: the local base state to linearise about. The default
+%   base state is XBAR = 0.
+%   - 'nModes', NMODES: the number of modes used in the PCA projection. 
+%   - 'xScl', XSCL: a matrix that rescales the X features to improve the
+%   conditioning. This must be the same scaling matrix used to train the
+%   original LANDO model on whic the XDIC and WTILDE are based.
+%
+%   Reference:
+%   Peter J. Baddoo, Benjamin Herrmann, Beverley J. McKeon and Steven L. Brunton,
+%   "Kernel Learning for Robust Dynamic Mode Decomposition: Linear and  Nonlinear 
+%   Disambiguation Optimization (LANDO)", arXiv:2106.01510.
+%
+%See also trainLANDO, predictLANDO, defineKernel, lorenzExample
 %
 
 nx = size(Xdic,1);

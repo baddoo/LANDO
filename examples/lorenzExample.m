@@ -82,7 +82,7 @@ niceFig; title({'Gaussian', 'kernel'},IN,LT,FS,15)
 subplot(1,4,4)
 plot3(recQuad.y(1,:),recQuad.y(2,:),recQuad.y(3,:),'Color',cols(3,:),LW,1);
 niceFig; title({'quadratic', 'kernel'},IN,LT,FS,15)
-sgtitle('Reconstructed trajectories',IN,LT,FS,20)
+sgtitle('reconstructed trajectories',IN,LT,FS,20)
 f1.Position(3:4) = [800,300];
 
 % Plot predictions
@@ -98,7 +98,7 @@ niceFig; title({'Gaussian', 'kernel'},IN,LT,FS,15)
 subplot(1,4,4)
 plot3(predQuad.y(1,:),predQuad.y(2,:),predQuad.y(3,:),'Color',cols(3,:),LW,1);
 niceFig; title({'quadratic', 'kernel'},IN,LT,FS,15);
-sgtitle('Predicted trajectories',IN,LT,FS,20)
+sgtitle('predicted trajectories',IN,LT,FS,20)
 f2.Position(3:4) = [800,300];
 
 function niceFig
