@@ -18,7 +18,7 @@ File | Mapping
 ```predictLANDO.m``` | Forms predictions based on a given LANDO model
 
 
-To get started, try running ```lorenzExample.m```
+To get started, add the source and example folders to the path (```addpath('src','examples')```) and  try running ```lorenzExample.m```
 
 Please contact me if you encounter any bugs or have requests for features.
 
