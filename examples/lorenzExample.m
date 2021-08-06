@@ -16,7 +16,7 @@ options = odeset('RelTol',1e-12,'AbsTol',1e-12*ones(1,3)); % Define options for 
 [t,x]=ode45(@(t,x) lorenzFun(t,x,Sigma,Beta,rho),tspan,x0,options); % Generate data
 data = [x(:,1) x(:,2) x(:,3)];
 
-% Compute velocity measurements
+% Compute the time-derivative of the data
 dxdt = zeros(length(x),3);
 for i=1:length(x)
     dxdt(i,:) = lorenzFun(0,x(i,:),Sigma,Beta,rho);
@@ -68,7 +68,7 @@ predQuad  = predictLANDO(quadModel,  10, x0Pred, 'cont', options);
 
 %% Plots
 LW = 'LineWidth'; IN  = 'Interpreter'; LT = 'Latex'; FS = 'FontSize';
-cols = colororder;
+cols = lines;
 
 % Plot reconstructions
 f1 = figure(1); subplot(1,4,1)
