@@ -1,6 +1,6 @@
 # Linear and nonlinear disambiguation optimization (LANDO)
 This repository contains the codes used to perform the LANDO algorithm.
-The framework is described in the folowing schematic and reference
+The framework is described in the following schematic and reference
 
 <br/>
 <p align="center"> 
