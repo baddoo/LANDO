@@ -8,6 +8,8 @@ The framework is described in the following schematic and reference
 </p>
 <br/>
 
+The code allows you to generate all the data used in the paper. Alternatively, you can download the data directly [at this Dropbox link](https://www.dropbox.com/sh/ym5iypkjontzydy/AACnYWmXGoIZt7VXSl-DM0waa?dl=0).
+
 Here's a brief summary of the main codes. Further details can be found in the function files, or by calling, for example, "help trainLANDO".
 
 File | Description
