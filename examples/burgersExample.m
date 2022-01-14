@@ -1,5 +1,10 @@
-addpath('../data/','../src/')
-load('burgersData'); % Loads the data
+%% LANDO on the Burgers' equation
+% This example applies LANDO to the Burgers' equation. Note that you need to
+% download the Burgers' equation data from the Dropbox link on the Github
+% readme. Alternatively, you can generate the data manually using the code
+% below.
+addpath('../src/')
+load('burgersData'); % Loads the data -- you need to download it first.
 %generateBurgersData; % Generates the data manually
 
 %%

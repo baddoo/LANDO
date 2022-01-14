@@ -1,11 +1,18 @@
-addpath('../src/','../data/'); % Add the source files to the path
+%% LANDO on the Kuramoto oscillator system
+% This example applies LANDO to the Kuramoto oscillator system to learn the 
+% fundamental frequencies. Note that you need to
+% download the simulation data from the Dropbox link on the Github
+% readme. Alternatively, you can generate the data manually using the code
+% below.
+
+addpath('../src/'); % Add the source files to the path
 
 nt = 1e3; % Number of samples
 nOsc = 2e3; % Number of oscillators
 tspan = linspace(0,20,nt);
 
 %% Load the data
-load('kuramotoData');
+load('kuramotoData'); % You need to download the data here first
 
 % You can also generate the data yourself, or change the parameters by
 % commenting out the text below
