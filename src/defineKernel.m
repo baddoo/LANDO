@@ -16,6 +16,10 @@ function k = defineKernel(varargin)
 %   polynomial. For example if POLYPARAMS = [1, 0, 3] then the kernel takes
 %   the form k(x,y) = 1 + 0*(x'*y) + 3*(x'*y).^2;
 %
+%   This file provides significant flexilibty for automatically defining kernels.
+%   However, you can sometimes reduce the overhead time of evaluating the kernel
+%   by defining the kernel manually and writing it "inline".
+%
 %   Reference:
 %   Peter J. Baddoo, Benjamin Herrmann, Beverley J. McKeon and Steven L. Brunton,
 %   "Kernel Learning for Robust Dynamic Mode Decomposition: Linear and  Nonlinear 
@@ -45,12 +49,14 @@ k{2} = @(x,y) evalKernelDeriv(x, y, gaussParams, polyParams);
 
 % Evaluate the kernel
 function k = evalKernel(x, y, gaussParams, polyParams)
-    if isnan(polyParams) % Polynomial component
         polyPart = 0;
-    else
-        polyCoefs3 = permute(polyParams(:),[3,2,1]);
-        polyExps3 = permute(0:numel(polyParams)-1,[1,3,2]);
-        polyPart = sum(polyCoefs3.*(x'*y).^polyExps3,3);
+    if ~isnan(polyParams) % Polynomial component
+        XY = x'*y;
+        for jj = 1:numel(polyParams)
+            if polyParams(jj)~=0
+                polyPart = polyPart + polyParams(jj).*XY.^(jj-1);
+            end
+        end    
     end
     if isnan(gaussParams(2)) % Gaussian component
         gaussPart = 0;
@@ -62,12 +68,14 @@ end
 
 % Evaluate the gradient of the kernel
 function k = evalKernelDeriv(x, y, gaussParams, polyParams)
-    if isnan(polyParams) % Polynomial component
-        polyPart = 0;
-    else
-        polyCoefs3 = permute(polyParams(:),[3,2,1]);
-        polyExps3 = permute(1:numel(polyParams)-1,[1,3,2]);
-        polyPart = sum(polyExps3.*polyCoefs3(2:end).*(x'*y).^(polyExps3-1),3).*x';
+    polyPart = 0;
+    if ~isnan(polyParams) % Polynomial component
+        XY = x'*y;
+        for jj = 2:numel(polyParams)
+            if polyParams(jj)~=0
+                polyPart = polyPart + (jj-1).*polyParams(jj).*XY.^(jj-2).*x';
+            end
+        end    
     end
     if isnan(gaussParams(2)) % Gaussian component
         gaussPart = 0;

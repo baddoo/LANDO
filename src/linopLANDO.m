@@ -30,15 +30,15 @@ function [eVals, eVecs, varargout] = linopLANDO(Xdic, Wtilde, kernel, varargin)
 nx = size(Xdic,1);
 [nModes, xScl, xBar] = parseInputs(nx,varargin{:});
 
-sXdic = xScl*Xdic; sxBar = xScl*xBar;
+sXdic = xScl.*Xdic; sxBar = xScl.*xBar;
 evalKernelDeriv = kernel{2};
 
 % Project model onto principal components of the kernel gradient
-[Ux,Sx,Vx] = svd((evalKernelDeriv(sXdic,sxBar)*xScl)',0);
+[Ux,Sx,Vx] = svd((evalKernelDeriv(sXdic,sxBar).*xScl')',0);
 if isempty(nModes); nModes = size(Ux,2); end
 nModes = min(nModes,size(Ux,2));
 Ux = Ux(:,1:nModes); Sx = Sx(1:nModes,1:nModes); Vx = Vx(:,1:nModes);
-LTilde = (Ux'*Wtilde)*(evalKernelDeriv(sXdic,sxBar)*xScl)*Ux;
+LTilde = (Ux'*Wtilde)*(evalKernelDeriv(sXdic,sxBar).*xScl')*Ux;
 
 % Do eigendecomposition of reduced operator
 [PsiHat,eVals] = eig(LTilde);
@@ -50,12 +50,12 @@ eVals = eVals(idx);
 PsiHat = PsiHat(:,idx); % Sort projected eigenvectors similarly
 
 % Project eigenvectors back onto full space
-eVecs = Wtilde*Vx*Sx*PsiHat*diag(1./eVals);
+eVecs = Wtilde*Vx*Sx*PsiHat./eVals.';
 
 % If requested, output the full linear operator
 if nargout>2
    
-linop = Wtilde*kernel{2}(sXdic,sxBar)*xScl;
+linop = Wtilde*kernel{2}(sXdic,sxBar).*xScl;
 varargout{1} = linop;
 
 end

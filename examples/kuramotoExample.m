@@ -83,6 +83,6 @@ xlabel('oscillator number',IN,LT,FS,20); ylabel('natural frequency',IN,LT,FS,20)
 
 %% ODE for generating data
 function TD = kuramoto(t,theta,omega,kappa,h)
-n = length(theta);
+       n = length(theta);
        TD = omega + 1/n*sum(kappa.*sin(theta-theta'),1)' + h*sin(theta);
-   end
+end

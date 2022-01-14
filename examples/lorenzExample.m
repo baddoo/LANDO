@@ -25,7 +25,7 @@ X = x'; Y = dxdt'; % Arrange the data into data matrices
 %% LANDO procedure
 
 % Rescale the data to improve the condition number
-xScl = diag(1./max(abs(X),[],2));
+xScl = 1./max(abs(X),[],2);
 
 % Shuffle the data to improve the quality of the dictionary
 ranp = randperm(size(X,2)); Xr = X(:,ranp); Yr = Y(:,ranp);
