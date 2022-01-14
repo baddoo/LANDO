@@ -10,7 +10,7 @@ The framework is described in the following schematic and reference
 
 Here's a brief summary of the main codes. Further details can be found in the function files, or by calling, for example, "help trainLANDO".
 
-File | Mapping
+File | Description
 ------------ | -------------
 ```defineKernel.m``` | Defines a kernel cell based on provided hyperparameters
 ```trainLANDO.m``` | Trains a LANDO model based on data, sparsification parameter and kernel
