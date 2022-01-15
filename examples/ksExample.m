@@ -105,7 +105,7 @@ subplot(1,3,3)
 imagesc(DMDlinop)
 title('DMD linear part',IN,LT,FS,15)
 axis equal; axis tight; xticks([]); yticks([])
-caxis([-1,1])
+caxis(100*[-1,1])
 colormap redblue
 
 f2.Position(3:4) = [700,250];
