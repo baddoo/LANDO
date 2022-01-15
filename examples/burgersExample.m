@@ -2,7 +2,8 @@
 % This example applies LANDO to the Burgers' equation. Note that you need to
 % download the Burgers' equation data from the Dropbox link on the Github
 % readme. Alternatively, you can generate the data manually using the code
-% below.
+% below. In this case, LANDO learns from discrete-time measurements:
+% y_k = x_k+1.
 addpath('../src/')
 load('burgersData'); % Loads the data -- you need to download it first.
 %generateBurgersData; % Generates the data manually
@@ -32,7 +33,7 @@ DMDEvals = DMDEvals(idx);
 
 %% Plot spectrum
 f1 = figure(1);
-LW = 'LineWidth'; INT = 'Interpreter'; FS = 'FontSize'; LT = 'Latex';
+LW = 'LineWidth'; IN = 'Interpreter'; FS = 'FontSize'; LT = 'Latex';
 p1 = scatter(0*(-10:10),(sqrt(nu)*pi*(-10:10)),70,'o',LW,2,'MarkerEdgeColor',.8*[1 1 1]);
 hold on
 p2 = scatter(real(sqrt(log(DMDEvals)/dt)),imag(sqrt(log(DMDEvals)/dt)),70,'r^',LW,2);
@@ -40,10 +41,10 @@ p3 = scatter(real(sqrt(log(LANDOeVals)/dt)),   imag(sqrt(log(LANDOeVals)/dt)),70
 hold off; grid on; box on
 axis([-.5,2.5,-2,2])
 set(gca,FS,15,'TickLabelInterpreter',LT)
-xlabel('$\Re[\sqrt{\lambda_n}]$',INT,LT,FS,15)
-ylabel('$\Im[\sqrt{\lambda_n}]$',INT,LT,FS,15)
-title('learned eigenvalues',INT,LT,FS,20)
-legend([p1,p2,p3],{'analytical','DMD','LANDO'},'Location','East',INT,LT)
+xlabel('$\Re[\sqrt{\lambda_n}]$',IN,LT)
+ylabel('$\Im[\sqrt{\lambda_n}]$',IN,LT)
+title('learned eigenvalues',IN,LT,FS,20)
+legend([p1,p2,p3],{'analytical','DMD','LANDO'},'Location','East',IN,LT)
 f1.Position(3:4) = [350,400];
 
 %% Compare linear operators
@@ -56,25 +57,25 @@ DFT = exp((0:nx-1).*(0:nx-1)'*2i*pi/nx); % Discrete Fourier transform matrix
 N1 =  floor((nx-1)/2); N21 = (-nx/2)*ones(rem(nx+1,2));
 wave1 = [(0:N1)  N21 (-N1:-1)]';
 diffVec = (1i*wave1*pi).^2;
-Aexact = nu*real(1/nx*conj(DFT)*(diffVec.*DFT)); % Exact linear operator
+TRUElinop = nu*real(1/nx*conj(DFT)*(diffVec.*DFT)); % Exact linear operator
 
 f2 = figure(2);
 subplot(1,3,1)
-imagesc(Aexact)
-title('true linear part',INT,LT,FS,15)
+imagesc(TRUElinop)
+title('true linear part',IN,LT,FS,15)
 axis equal; axis tight; xticks([]); yticks([])
 caxis(10*[-1,1])
 
 subplot(1,3,2)
 imagesc(LANDOlinop)
-title('LANDO linear part',INT,LT,FS,15)
+title('LANDO linear part',IN,LT,FS,15)
 axis equal; axis tight; xticks([]); yticks([])
 caxis(.01*[-1,1])
 colormap redblue
 
 subplot(1,3,3)
 imagesc(DMDlinop)
-title('DMD linear part',INT,LT,FS,15)
+title('DMD linear part',IN,LT,FS,15)
 axis equal; axis tight; xticks([]); yticks([])
 caxis(.1*[-1,1])
 colormap redblue
