@@ -10,6 +10,8 @@ The framework is described in the following schematic and reference
 
 The code allows you to generate all the data used in the paper. Alternatively, you can download the data directly [at this Dropbox link](https://www.dropbox.com/sh/ym5iypkjontzydy/AACnYWmXGoIZt7VXSl-DM0waa?dl=0).
 
+If youy want to generate the data manually then you need to install [Chebun](www.chebfun.org).
+
 Here's a brief summary of the main codes. Further details can be found in the function files, or by calling, for example, "help trainLANDO".
 
 File | Description
